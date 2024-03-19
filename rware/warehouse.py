@@ -169,6 +169,7 @@ class Warehouse(gym.Env):
         max_steps: Optional[int],
         reward_type: RewardType,
         agent_type: str = 'cl',
+        penalty: bool = False,
         layout: str = None,
         observation_type: ObserationType=ObserationType.FLATTENED,
         image_observation_layers: List[ImageLayer]=[
@@ -268,6 +269,7 @@ class Warehouse(gym.Env):
         self.max_inactivity_steps: Optional[int] = max_inactivity_steps
         self.reward_type = reward_type
         self.reward_range = (0, 1)
+        self.penalty = penalty
 
         self._cur_inactive_steps = None
         self._cur_steps = 0
@@ -1235,6 +1237,10 @@ class Warehouse(gym.Env):
 
         new_obs = tuple([self._make_obs(agent) for agent in self.agents])
         info = {}
+
+        if self.penalty:
+            rewards = [r - 0.0005 for r in rewards]
+
         return new_obs, list(rewards), dones, info
 
     def render(self, mode="human"):

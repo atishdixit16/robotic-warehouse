@@ -13,12 +13,14 @@ _difficulty = {"-easy": 2, "": 1, "-hard": 0.5}
 
 _diversity = {"-div":True, "":False}
 
-_perms = itertools.product(_sizes.keys(), range(1,20), range(1, 20), _diversity)
+_penalties = {"-pen": True, "": False}
 
-for size, items, agents, div in _perms:
+_perms = itertools.product(_sizes.keys(), range(1,20), range(1, 20), _diversity, _penalties)
+
+for size, items, agents, div, pen in _perms:
     # normal tasks
     gym.register(
-        id=f"rware-{size}-{agents}ag{div}-{items}it-v1",
+        id=f"rware-{size}-{agents}ag{div}-{items}it{pen}-v1",
         entry_point="rware.warehouse:Warehouse",
         kwargs={
             "column_height": 8,
@@ -32,6 +34,7 @@ for size, items, agents, div in _perms:
             "max_inactivity_steps": None,
             "max_steps": 500,
             "reward_type": RewardType.INDIVIDUAL,
+            "penalty": _penalties[pen],
         },
     )
 
