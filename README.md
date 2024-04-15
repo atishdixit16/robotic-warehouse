@@ -23,8 +23,7 @@
 
 # Fork Note
 
-A version of robotic warehouse with diversity in agents roles (carrier, loaders, carrier+loaders), also provides a reward mapping function which internally swaps the role of agents to give its rewards from the perspective of the trajectory traversed by the swapped agent. Discontnued, because such sahring of trajectories lead to mis-estimation of agent's value functions due to change in agent's transition dynamics with the environment.
-
+A version of robotic warehouse with diversity in agents roles (carrier, loaders, carrier+loaders), also provides a reward mapping function which internally swaps the role of agents to give its rewards from the perspective of the trajectory traversed by the swapped agent. 
 Below is an illustration with three diverse agents.
 <p align="center">
  <img width="225px" src="docs/img/drware_3ag.gif" align="center" alt="Diverse Multi-Robot Warehouse (RWARE) illustration" />
